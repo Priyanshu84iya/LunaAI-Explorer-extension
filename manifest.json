@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "LunaAI Explorer",
+  "version": "0.1.0",
+  "description": "Turn any highlighted text into an interactive AI-generated knowledge world, powered by AshnaAI.",
+  "permissions": ["storage", "activeTab", "scripting"],
+  "host_permissions": ["<all_urls>"],
+  "action": {
+    "default_popup": "src/popup/index.html",
+    "default_title": "LunaAI Explorer"
+  },
+  "options_page": "src/options/index.html",
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["src/explorer/index.html", "assets/*"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

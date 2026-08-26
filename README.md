@@ -8,30 +8,40 @@ Highlight any text on a webpage → click **✨ Explain with LunaAI** → AshnaA
 
 ## Getting started
 
+Install dependencies and create a production build:
+
 ```bash
-cd lunaai-explorer
 npm install
-npm run dev        # local dev server (explorer preview)
-npm run build      # production build -> dist/
+npm run build      # type-check, bundle, and copy the manifest to dist/
 ```
 
-Load the extension in Chrome/Edge:
+For local development, use `npm run dev` to start the Vite development server and `npm run preview` to preview the production bundle.
 
-1. Open `chrome://extensions`
-2. Enable **Developer mode**
-3. Click **Load unpacked** and select the `lunaai-explorer` folder
+Load the built extension in Chrome or Edge:
+
+1. Open `chrome://extensions`.
+2. Enable **Developer mode**.
+3. Click **Load unpacked** and select the generated `dist/` folder.
+4. After rebuilding, click **Reload** on the extension card.
+
+## Features
+
+- Explain highlighted text from any webpage using the floating LunaAI toolbar.
+- Explore summaries, related concepts, and deeper context in an interactive panel.
+- Select an AI model from a searchable, provider-grouped dropdown in **Options**.
+- Keep provider configuration centralized through the AshnaAI client and schemas.
 
 ## Architecture
 
-- `src/content/` — text selection detection + floating "Explain with LunaAI" button
+- `src/content/` — text selection detection and floating "Explain with LunaAI" button
 - `src/explorer/` — the topic exploration panel (React)
-- `src/ai/` — centralized AshnaAI provider, client, schemas, validation
+- `src/ai/` — centralized AshnaAI provider, client, model catalog, schemas, and validation
 - `src/background/` — MV3 service worker
-- `src/popup/`, `src/options/` — extension UI
+- `src/popup/`, `src/options/` — extension UI and model configuration
 
 ## AI configuration
 
-Open the extension **Options** page to configure your AshnaAI API endpoint and key. The provider is centralized so UI components never talk to the API directly.
+Open the extension **Options** page to configure the AshnaAI API endpoint, API key, and model. Models are searchable and grouped by provider; the selected model is saved with the rest of the extension settings.
 
 ## Privacy
 

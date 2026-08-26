@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Save, Trash2, RotateCcw } from 'lucide-react';
 import type { ProviderSettings } from '../ai/types';
 import { getSettings, saveSettings, clearCache, resetSettings } from '../storage/extensionStorage';
+import { ModelDropdown } from './ModelDropdown';
 
 export function Settings() {
   const [settings, setSettings] = useState<ProviderSettings | null>(null);
@@ -74,10 +75,9 @@ export function Settings() {
           </Field>
 
           <Field label="Model">
-            <input
+            <ModelDropdown
               value={settings.model}
-              onChange={(e) => update({ model: e.target.value })}
-              className="w-full px-3 py-2 rounded-lg bg-white/5 border border-white/10 text-sm focus:outline-none focus:border-luna-accent"
+              onChange={(model) => update({ model })}
             />
           </Field>
 
